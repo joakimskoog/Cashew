@@ -4,4 +4,9 @@
     <TargetFrameworks>netstandard1.2;net451</TargetFrameworks>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="CacheManager.Core" Version="1.0.1" />
+    <PackageReference Include="System.Net.Http" Version="4.3.2" />
+  </ItemGroup>
+
 </Project>
