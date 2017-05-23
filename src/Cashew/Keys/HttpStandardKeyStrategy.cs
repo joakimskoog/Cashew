@@ -60,26 +60,3 @@ namespace Cashew.Keys
         }
     }
 }
-
-
-
-//public string GetCacheKey(HttpRequestMessage request, HttpResponseMessage response)
-//{
-//if (request == null) throw new ArgumentNullException(nameof(request));
-//if (response == null) throw new ArgumentNullException(nameof(response));
-
-//var uri = GetUri(request);
-
-////todo: Fix this code. Make it more readable and performant
-//var varyHeaders = request.Headers.Where(x => response.Headers.Vary.Any(y => y.Equals(x.Key, StringComparison.CurrentCultureIgnoreCase))).SelectMany(o => o.Value);
-//var formattedVaryheaderString = varyHeaders.Aggregate("", (current, varyHeader) => current + (VaryHeaderDelimiter + varyHeader));
-
-//_uriVaryHeaderMapping.AddOrUpdate(uri, formattedVaryheaderString, (k, existingValue) => formattedVaryheaderString);
-
-//return $"{uri}{formattedVaryheaderString}";
-//}
-
-//public void Dispose()
-//{
-//_uriVaryHeaderMapping.Clear();
-//}
