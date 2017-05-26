@@ -13,6 +13,7 @@ namespace Cashew.Core.Keys
         /// </summary>
         /// <param name="request">The HTTP request.</param>
         /// <returns>The cache key.</returns>
+        /// <exception cref="T:System.ArgumentNullException">If the <paramref name="request"/> is null</exception>
         string GetCacheKey(HttpRequestMessage request);
 
         /// <summary>
@@ -21,6 +22,7 @@ namespace Cashew.Core.Keys
         /// <param name="request">The HTTP request.</param>
         /// <param name="response">The HTTP response.</param>
         /// <returns>The cache key.</returns>
+        /// <exception cref="T:System.ArgumentNullException">If the <paramref name="request"/> or <paramref name="response"/> is null</exception>
         string GetCacheKey(HttpRequestMessage request, HttpResponseMessage response);
     }
 }
