@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Http;
-using CacheManager.Core;
 
-namespace Cashew.Keys
+namespace Cashew.Core.Keys
 {
     public class HttpStandardKeyStrategy : ICacheKeyStrategy
     {
         private const string VaryHeaderDelimiter = "_";
 
-        private readonly ICacheManager<object> _cache;
+        private readonly IHttpCache _cache;
         private readonly CacheKeySetting _cacheKeySetting;
 
-        public HttpStandardKeyStrategy(ICacheManager<object> cache, CacheKeySetting cacheKeySetting = CacheKeySetting.Standard)
+        public HttpStandardKeyStrategy(IHttpCache cache, CacheKeySetting cacheKeySetting = CacheKeySetting.Standard)
         {
             if (cache == null) throw new ArgumentNullException(nameof(cache));
             _cache = cache;
@@ -26,7 +25,7 @@ namespace Cashew.Keys
             var uri = GetUri(request);
             var varyHeaders = _cache.Get<string>(uri);
 
-            return $"{uri}{varyHeaders}";
+             return $"{uri}{varyHeaders}";
         }
 
         public string GetCacheKey(HttpRequestMessage request, HttpResponseMessage response)
@@ -38,8 +37,8 @@ namespace Cashew.Keys
             var varyHeaders = request.Headers.Where(x => response.Headers.Vary.Any(y => y.Equals(x.Key, StringComparison.CurrentCultureIgnoreCase))).SelectMany(o => o.Value);
             var formattedVaryheaderString = varyHeaders.Aggregate("", (current, varyHeader) => current + (VaryHeaderDelimiter + varyHeader));
 
-            _cache.AddOrUpdate(uri, formattedVaryheaderString, current => formattedVaryheaderString);
-
+            _cache.Put(uri, formattedVaryheaderString);
+            
             return $"{uri}{formattedVaryheaderString}";
         }
 

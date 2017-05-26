@@ -1,4 +1,4 @@
-﻿namespace Cashew.Headers
+﻿namespace Cashew.Core.Headers
 {
     public enum CacheStatus
     {

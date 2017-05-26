@@ -2,20 +2,21 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using CacheManager.Core;
-using Cashew.Keys;
+using Cashew.Core.Keys;
 
-namespace Cashew
+namespace Cashew.Core
 {
     public class HttpCachingHandler : DelegatingHandler
     {
+        private readonly IHttpCache _cache;
         private readonly ICacheKeyStrategy _keyStrategy;
-        private readonly ICacheManager<object> _cache;
-
-        public HttpCachingHandler(ICacheManager<object> cache, ICacheKeyStrategy keyStrategy)
+        
+        public HttpCachingHandler(IHttpCache cache, ICacheKeyStrategy keyStrategy)
         {
-            _cache = cache ?? throw new ArgumentNullException(nameof(cache));
-            _keyStrategy = keyStrategy ?? throw new ArgumentNullException(nameof(keyStrategy));
+            if (cache == null) throw new ArgumentNullException(nameof(cache));
+            if (keyStrategy == null) throw new ArgumentNullException(nameof(keyStrategy));
+            _cache = cache;
+            _keyStrategy = keyStrategy;
         }
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
@@ -29,7 +30,6 @@ namespace Cashew
         {
             if (disposeManaged)
             {
-                _cache.Dispose();
                 _cache.Dispose();
             }
 

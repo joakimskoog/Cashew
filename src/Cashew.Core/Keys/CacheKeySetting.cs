@@ -1,4 +1,4 @@
-﻿namespace Cashew.Keys
+﻿namespace Cashew.Core.Keys
 {
     /// <summary>
     /// Defines how many requests you want to cache, the recommended approach is to use <see cref="Standard"/>.
