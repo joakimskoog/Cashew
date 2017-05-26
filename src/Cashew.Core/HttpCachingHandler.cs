@@ -3,13 +3,14 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Cashew.Core.Keys;
-
 namespace Cashew.Core
 {
     public class HttpCachingHandler : DelegatingHandler
     {
         private readonly IHttpCache _cache;
         private readonly ICacheKeyStrategy _keyStrategy;
+
+        internal ISystemClock SystemClock { get; set; }
         
         public HttpCachingHandler(IHttpCache cache, ICacheKeyStrategy keyStrategy)
         {
@@ -35,5 +36,15 @@ namespace Cashew.Core
 
             base.Dispose(disposeManaged);
         }
+    }
+
+    internal interface ISystemClock
+    {
+        DateTimeOffset UtcNow { get; }
+    }
+
+    internal class DefaultSystemClock : ISystemClock
+    {
+        public DateTimeOffset UtcNow => DateTimeOffset.UtcNow;
     }
 }

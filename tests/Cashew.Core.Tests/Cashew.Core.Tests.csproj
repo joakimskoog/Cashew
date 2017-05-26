@@ -72,6 +72,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\RequestBuilder.cs" />
+    <Compile Include="Helpers\ResponseBuilder.cs" />
+    <Compile Include="HttpCachingHandlerTests.cs" />
     <Compile Include="Keys\HttpStandardKeyStrategyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
