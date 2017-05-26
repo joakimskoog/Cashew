@@ -27,7 +27,7 @@ namespace Cashew.Adapters.CacheManager.Tests
         {
             var cacheMock = new Mock<ICacheManager<object>>();
             cacheMock.Setup(x => x.Get("key")).Returns("value");
-            var sut = new CacheAdapter(cacheMock.Object);
+            var sut = new CacheManagerAdapter(cacheMock.Object);
 
             var result = sut.Get("key") as string;
 
@@ -58,11 +58,11 @@ namespace Cashew.Adapters.CacheManager.Tests
         {
             var cacheMock = new Mock<ICacheManager<object>>();
             cacheMock.Setup(x => x.Put("key", "value"));
-            var sut = new CacheAdapter(cacheMock.Object);
+            var sut = new CacheManagerAdapter(cacheMock.Object);
 
             sut.Put("key", "value");
 
-            cacheMock.Verify(x => x.Put("key", "value"), Times.Once);
+            cacheMock.Verify(x => x.AddOrUpdate("key", "value", It.IsAny<Func<object,object>>()), Times.Once);
         }
 
         [Fact]
