@@ -32,6 +32,5 @@ namespace Cashew.Adapters.CacheManager
         {
             _cacheManager.Dispose();
         }
-
     }
 }
