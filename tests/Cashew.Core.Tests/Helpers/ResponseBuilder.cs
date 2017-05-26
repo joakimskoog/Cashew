@@ -68,6 +68,39 @@ namespace Cashew.Core.Tests.Helpers
             return _instance;
         }
 
+        public ResponseBuilder WithNoStore()
+        {
+            _instance._builderActions.Add(delegate (HttpResponseMessage response)
+            {
+                EnsureCacheControlHeaders(response);
+                response.Headers.CacheControl.NoStore = true;
+            });
+
+            return _instance;
+        }
+
+        public ResponseBuilder WithMustRevalidate()
+        {
+            _instance._builderActions.Add(delegate (HttpResponseMessage response)
+            {
+                EnsureCacheControlHeaders(response);
+                response.Headers.CacheControl.MustRevalidate = true;
+            });
+
+            return _instance;
+        }
+
+        public ResponseBuilder WithProxyRevalidate()
+        {
+            _instance._builderActions.Add(delegate (HttpResponseMessage response)
+            {
+                EnsureCacheControlHeaders(response);
+                response.Headers.CacheControl.ProxyRevalidate = true;
+            });
+
+            return _instance;
+        }
+
         private static void EnsureCacheControlHeaders(HttpResponseMessage response)
         {
             if (response.Headers.CacheControl == null)
