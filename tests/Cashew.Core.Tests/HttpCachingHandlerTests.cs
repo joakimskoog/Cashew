@@ -125,7 +125,7 @@ namespace Cashew.Core.Tests
         }
 
         #endregion
-        
+
         #region Request.Max-age
 
         [Fact]
@@ -420,7 +420,7 @@ namespace Cashew.Core.Tests
             var response = await _client.SendAsync(RequestBuilder.Request(HttpMethod.Get, Url).Build());
             _cacheMock.Setup(x => x.Get(It.IsAny<string>())).Returns(freshResponse);
             var secondResponse = await _client.SendAsync(RequestBuilder.Request(HttpMethod.Get, Url).Build());
-            
+
             Assert.Equal(CacheStatus.Miss, response.Headers.GetCashewStatusHeader());
             Assert.Equal(CacheStatus.Hit, secondResponse.Headers.GetCashewStatusHeader());
 
@@ -445,7 +445,7 @@ namespace Cashew.Core.Tests
             _fakeMessageHandler.Response = revalidatedResponse;
             var secondResponse = await _client.SendAsync(RequestBuilder.Request(HttpMethod.Get, Url).Build());
 
-            
+
             Assert.Equal(CacheStatus.Miss, response.Headers.GetCashewStatusHeader());
             Assert.Equal(firstResponse, response);
             Assert.Equal(CacheStatus.Revalidated, secondResponse.Headers.GetCashewStatusHeader());
@@ -530,10 +530,77 @@ namespace Cashew.Core.Tests
 
         #endregion
 
+        #region Response.max-age
 
+        [Fact]
+        public async Task SendAsync_MaxAgeInResponseAndAgeLessThanMaxAge_CachedResponseIsFresh()
+        {
+            var serverResponse = ResponseBuilder.Response(HttpStatusCode.OK).Created(_testDate.Subtract(TimeSpan.FromMinutes(30))).WithMaxAge(3600).Build();
+            _cacheMock.Setup(x => x.Get(It.IsAny<string>())).Returns(null);
+            _fakeMessageHandler.Response = serverResponse;
+
+            var response = await _client.SendAsync(RequestBuilder.Request(HttpMethod.Get, Url).Build());
+            _cacheMock.Setup(x => x.Get(It.IsAny<string>())).Returns(serverResponse);
+            var secondResponse = await _client.SendAsync(RequestBuilder.Request(HttpMethod.Get, Url).Build());
+
+            Assert.Equal(CacheStatus.Miss, response.Headers.GetCashewStatusHeader());
+            Assert.Equal(CacheStatus.Hit, secondResponse.Headers.GetCashewStatusHeader());
+        }
+
+        [Fact]
+        public async Task SendAsync_MaxAgeInResponseAndAgeHigherThanMaxAge_CachedResponseIsStale()
+        {
+            var serverResponse = ResponseBuilder.Response(HttpStatusCode.OK).Created(_testDate.Subtract(TimeSpan.FromHours(2))).WithMaxAge(3600).Build();
+            _cacheMock.Setup(x => x.Get(It.IsAny<string>())).Returns(null);
+            _fakeMessageHandler.Response = serverResponse;
+
+            var response = await _client.SendAsync(RequestBuilder.Request(HttpMethod.Get, Url).Build());
+            _cacheMock.Setup(x => x.Get(It.IsAny<string>())).Returns(serverResponse);
+            var secondResponse = await _client.SendAsync(RequestBuilder.Request(HttpMethod.Get, Url).WithMaxStale().Build());
+
+            Assert.Equal(CacheStatus.Miss, response.Headers.GetCashewStatusHeader());
+            Assert.Equal(CacheStatus.Hit, secondResponse.Headers.GetCashewStatusHeader());
+        }
+
+        #endregion
+
+        #region Response.s-maxage
+
+        [Fact]
+        public async Task SendAsync_SharedMaxAgeInResponseAndAgeLessThanSharedMaxAge_CachedResponseIsFresh()
+        {
+            var serverResponse = ResponseBuilder.Response(HttpStatusCode.OK).Created(_testDate.Subtract(TimeSpan.FromMinutes(30))).WithSharedMaxAge(3600).Build();
+            _cacheMock.Setup(x => x.Get(It.IsAny<string>())).Returns(null);
+            _fakeMessageHandler.Response = serverResponse;
+
+            var response = await _client.SendAsync(RequestBuilder.Request(HttpMethod.Get, Url).Build());
+            _cacheMock.Setup(x => x.Get(It.IsAny<string>())).Returns(serverResponse);
+            var secondResponse = await _client.SendAsync(RequestBuilder.Request(HttpMethod.Get, Url).Build());
+
+            Assert.Equal(CacheStatus.Miss, response.Headers.GetCashewStatusHeader());
+            Assert.Equal(CacheStatus.Hit, secondResponse.Headers.GetCashewStatusHeader());
+        }
+        
+        [Fact]
+        public async Task SendAsync_SharedMaxAgeInResponseAndAgeHigherThanSharedMaxAge_CachedResponseIsStale()
+        {
+            var serverResponse = ResponseBuilder.Response(HttpStatusCode.OK).Created(_testDate.Subtract(TimeSpan.FromHours(2))).WithSharedMaxAge(3600).Build();
+            _cacheMock.Setup(x => x.Get(It.IsAny<string>())).Returns(null);
+            _fakeMessageHandler.Response = serverResponse;
+
+            var response = await _client.SendAsync(RequestBuilder.Request(HttpMethod.Get, Url).Build());
+            _cacheMock.Setup(x => x.Get(It.IsAny<string>())).Returns(serverResponse);
+            var secondResponse = await _client.SendAsync(RequestBuilder.Request(HttpMethod.Get, Url).WithMaxStale().Build());
+
+            Assert.Equal(CacheStatus.Miss, response.Headers.GetCashewStatusHeader());
+            Assert.Equal(CacheStatus.Hit, secondResponse.Headers.GetCashewStatusHeader());
+        }
+
+        #endregion
+        
         //response.noCache []
-        //response.maxAge []
-        //response.sMaxAge []
+        //response.maxAge [X]
+        //response.sMaxAge [X]
         //response.proxyRevalidate [X]
         //response.noStore [X]
         //response.mustRevalidate [X]

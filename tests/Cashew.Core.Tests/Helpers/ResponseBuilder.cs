@@ -29,12 +29,12 @@ namespace Cashew.Core.Tests.Helpers
             return _instance;
         }
 
-        public ResponseBuilder WithSharedMaxAge(TimeSpan age)
+        public ResponseBuilder WithSharedMaxAge(int ageInSeconds)
         {
             _instance._builderActions.Add(delegate (HttpResponseMessage response)
             {
                 EnsureCacheControlHeaders(response);
-                response.Headers.CacheControl.SharedMaxAge = age;
+                response.Headers.CacheControl.SharedMaxAge = TimeSpan.FromSeconds(ageInSeconds);
             });
 
             return _instance;
