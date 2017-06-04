@@ -89,23 +89,6 @@ namespace Cashew.Core.Tests
 
         #endregion
 
-        [Fact]
-        public async Task SendAsync_NoItemsInCache_CacheMiss()
-        {
-            var request = RequestBuilder.Request(HttpMethod.Get, Url).Build();
-            var fakeResponse = ResponseBuilder.Response(HttpStatusCode.OK).Build();
-            _fakeMessageHandler.Response = fakeResponse;
-            _cacheMock.Setup(x => x.Get(It.IsAny<string>())).Returns(null);
-
-            var response = await _client.SendAsync(request);
-
-            Assert.Equal(CacheStatus.Miss, response.Headers.GetCashewStatusHeader());
-            Assert.Equal(fakeResponse, response);
-            _cacheMock.Verify(x => x.Get(It.IsAny<string>()), Times.Once);
-
-            _cacheMock.Reset();
-        }
-
         #region Request.No-store
 
         [Fact]
@@ -580,7 +563,7 @@ namespace Cashew.Core.Tests
             Assert.Equal(CacheStatus.Miss, response.Headers.GetCashewStatusHeader());
             Assert.Equal(CacheStatus.Hit, secondResponse.Headers.GetCashewStatusHeader());
         }
-        
+
         [Fact]
         public async Task SendAsync_SharedMaxAgeInResponseAndAgeHigherThanSharedMaxAge_CachedResponseIsStale()
         {
@@ -597,17 +580,44 @@ namespace Cashew.Core.Tests
         }
 
         #endregion
-        
-        //response.noCache []
-        //response.maxAge [X]
-        //response.sMaxAge [X]
-        //response.proxyRevalidate [X]
-        //response.noStore [X]
-        //response.mustRevalidate [X]
-        //response.noTransform [-] does not apply to our cache
-        //response.public [-] does not apply at the moment
-        //response.private [-] does not apply at the moment
 
+        #region Response.No-cache
+
+        [Fact]
+        public async Task SendAsync_NoCacheInResponse_CachedResponseIsRevalidated()
+        {
+            _cacheMock.Setup(x => x.Get(It.IsAny<string>())).Returns(() => null);
+            var freshResponse = ResponseBuilder.Response(HttpStatusCode.OK).Created(_testDate).WithNoCache().Build();
+            _fakeMessageHandler.Response = freshResponse;
+
+            var firstResponse = await _client.SendAsync(RequestBuilder.Request(HttpMethod.Get, Url).Build());
+            _cacheMock.Setup(x => x.Get(It.IsAny<string>())).Returns(firstResponse);
+            var secondResponse = await _client.SendAsync(RequestBuilder.Request(HttpMethod.Get, Url).Build());
+
+            Assert.Equal(firstResponse, secondResponse);
+            Assert.Equal(CacheStatus.Revalidated, secondResponse.Headers.GetCashewStatusHeader());
+
+            _cacheMock.Reset();
+        }
+
+        #endregion
+
+        [Fact]
+        public async Task SendAsync_NoItemsInCache_CacheMiss()
+        {
+            var request = RequestBuilder.Request(HttpMethod.Get, Url).Build();
+            var fakeResponse = ResponseBuilder.Response(HttpStatusCode.OK).Build();
+            _fakeMessageHandler.Response = fakeResponse;
+            _cacheMock.Setup(x => x.Get(It.IsAny<string>())).Returns(null);
+
+            var response = await _client.SendAsync(request);
+
+            Assert.Equal(CacheStatus.Miss, response.Headers.GetCashewStatusHeader());
+            Assert.Equal(fakeResponse, response);
+            _cacheMock.Verify(x => x.Get(It.IsAny<string>()), Times.Once);
+
+            _cacheMock.Reset();
+        }
 
         //combination of request and response headers
     }
