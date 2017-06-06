@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Cashew.Core\Cashew.Core.csproj" />
+    <ProjectReference Include="..\Cashew\Cashew.csproj" />
   </ItemGroup>
 
 </Project>

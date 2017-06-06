@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-namespace Cashew.Core.Headers
+namespace Cashew.Headers
 {
     internal static class HttpRequestExtensions
     {

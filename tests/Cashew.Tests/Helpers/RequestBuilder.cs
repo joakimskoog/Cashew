@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-namespace Cashew.Core.Tests.Helpers
+namespace Cashew.Tests.Helpers
 {
     public class RequestBuilder
     {

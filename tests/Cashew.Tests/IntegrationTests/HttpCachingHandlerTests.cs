@@ -1,6 +1,6 @@
 ﻿
 
-namespace Cashew.Core.Tests.IntegrationTests
+namespace Cashew.Tests.IntegrationTests
 {
     public class HttpCachingHandlerTests
     {

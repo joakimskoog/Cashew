@@ -4,13 +4,13 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Cashew.Core.Headers;
-using Cashew.Core.Keys;
-using Cashew.Core.Tests.Helpers;
+using Cashew.Headers;
+using Cashew.Keys;
+using Cashew.Tests.Helpers;
 using Moq;
 using Xunit;
 
-namespace Cashew.Core.Tests.UnitTests
+namespace Cashew.Tests.UnitTests
 {
     public class HttpCachingHandlerTests
     {
@@ -716,7 +716,7 @@ namespace Cashew.Core.Tests.UnitTests
             _fakeMessageHandler.Response = fakeResponse;
             _cacheMock.Setup(x => x.Get(It.IsAny<string>())).Returns(null);
             var defaultCacheableStatusCodes = _cachingHandler.CacheableStatusCodes;
-            _cachingHandler.CacheableStatusCodes = new[] {HttpStatusCode.OK};
+            _cachingHandler.CacheableStatusCodes = new[] { HttpStatusCode.OK };
 
             var response = await _client.SendAsync(request);
 
@@ -734,7 +734,7 @@ namespace Cashew.Core.Tests.UnitTests
             fakeResponse.Content = null;
             _fakeMessageHandler.Response = fakeResponse;
             _cacheMock.Setup(x => x.Get(It.IsAny<string>())).Returns(null);
-            
+
             var response = await _client.SendAsync(request);
 
             Assert.Equal(CacheStatus.Miss, response.Headers.GetCashewStatusHeader());

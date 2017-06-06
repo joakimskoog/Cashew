@@ -58,9 +58,9 @@
       <Project>{ea2304cf-4b41-456e-9924-5916122f6515}</Project>
       <Name>Cashew.Adapters.CacheManager</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Cashew.Core\Cashew.Core.csproj">
+    <ProjectReference Include="..\..\src\Cashew\Cashew.csproj">
       <Project>{84c759d6-9ee5-4939-b585-d9cc64baf6e0}</Project>
-      <Name>Cashew.Core</Name>
+      <Name>Cashew</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Cashew.Core.Headers;
+using Cashew.Headers;
 
-namespace Cashew.Core.Tests.Helpers
+namespace Cashew.Tests.Helpers
 {
     public class ResponseBuilder
     {

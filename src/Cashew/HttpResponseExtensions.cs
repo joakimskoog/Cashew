@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 
-namespace Cashew.Core
+namespace Cashew
 {
     internal static class HttpResponseExtensions
     {

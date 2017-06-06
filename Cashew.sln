@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cashew.Core", "src\Cashew.Core\Cashew.Core.csproj", "{84C759D6-9EE5-4939-B585-D9CC64BAF6E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cashew", "src\Cashew\Cashew.csproj", "{84C759D6-9EE5-4939-B585-D9CC64BAF6E0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{856A2BB6-924E-46FA-BFC0-548268CC985D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2429ECE9-1952-4BF1-B723-9F065F89F92A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cashew.Core.Tests", "tests\Cashew.Core.Tests\Cashew.Core.Tests.csproj", "{B0916BC9-9BA4-4294-9FF0-8273F0AAE86C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cashew.Tests", "tests\Cashew.Tests\Cashew.Tests.csproj", "{B0916BC9-9BA4-4294-9FF0-8273F0AAE86C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cashew.Adapters.CacheManager", "src\Cashew.Adapters.CacheManager\Cashew.Adapters.CacheManager.csproj", "{EA2304CF-4B41-456E-9924-5916122F6515}"
 EndProject

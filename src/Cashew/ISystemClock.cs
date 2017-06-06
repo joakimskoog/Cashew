@@ -1,8 +1,9 @@
 using System;
 using System.Runtime.CompilerServices;
-[assembly: InternalsVisibleTo("Cashew.Core.Tests")]
 
-namespace Cashew.Core
+[assembly: InternalsVisibleTo("Cashew.Tests")]
+
+namespace Cashew
 {
     
     internal interface ISystemClock

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 
-namespace Cashew.Core.Headers
+namespace Cashew.Headers
 {
     public static class HttpResponseHeaderExtensions
     {

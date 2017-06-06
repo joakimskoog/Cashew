@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Net.Http;
 
-namespace Cashew.Core.Keys
+namespace Cashew.Keys
 {
     public class HttpStandardKeyStrategy : ICacheKeyStrategy
     {

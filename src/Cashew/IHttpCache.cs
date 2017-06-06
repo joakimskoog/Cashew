@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-[assembly:InternalsVisibleTo("Cashew.Core.Tests")]
-namespace Cashew.Core
+[assembly:InternalsVisibleTo("Cashew.Tests")]
+namespace Cashew
 {
     /// <summary>
     /// The contract for caching functionality that is used for caching HTTP responses.

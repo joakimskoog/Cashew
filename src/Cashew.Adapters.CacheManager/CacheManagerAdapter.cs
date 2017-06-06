@@ -1,6 +1,5 @@
 ﻿using System;
 using CacheManager.Core;
-using Cashew.Core;
 
 namespace Cashew.Adapters.CacheManager
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 
-namespace Cashew.Core.Keys
+namespace Cashew.Keys
 {
     /// <summary>
     /// Defines how cache keys are retrieved from <see cref="HttpRequestMessage"/> and <see cref="HttpRequestMessage"/> for usage in <see cref="HttpCachingHandler"/>

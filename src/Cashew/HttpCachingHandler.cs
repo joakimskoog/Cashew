@@ -1,13 +1,13 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Cashew.Core.Headers;
-using Cashew.Core.Keys;
-using System.Linq;
+using Cashew.Headers;
+using Cashew.Keys;
 
-namespace Cashew.Core
+namespace Cashew
 {
     public class HttpCachingHandler : DelegatingHandler
     {
