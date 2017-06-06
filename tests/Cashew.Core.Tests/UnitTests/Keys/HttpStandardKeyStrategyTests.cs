@@ -6,7 +6,7 @@ using Cashew.Core.Keys;
 using Moq;
 using Xunit;
 
-namespace Cashew.Core.Tests.Keys
+namespace Cashew.Core.Tests.UnitTests.Keys
 {
     public class HttpStandardKeyStrategyTests
     {

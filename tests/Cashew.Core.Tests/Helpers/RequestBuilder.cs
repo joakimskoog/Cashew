@@ -18,6 +18,7 @@ namespace Cashew.Core.Tests.Helpers
             {
                 request.Method = method;
                 request.RequestUri = new Uri(url);
+                EnsureCacheControlHeaders(request);
             });
 
             return instance;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Cashew.Core.Headers;
 
 namespace Cashew.Core.Tests.Helpers
 {
@@ -17,6 +18,7 @@ namespace Cashew.Core.Tests.Helpers
             var instance = _instance ?? (_instance = new ResponseBuilder());
             instance._builderActions.Add(delegate (HttpResponseMessage response)
             {
+                EnsureCacheControlHeaders(response);
                 response.StatusCode = statusCode;
             });
 
@@ -25,7 +27,12 @@ namespace Cashew.Core.Tests.Helpers
 
         public ResponseBuilder Created(DateTimeOffset date)
         {
-            _instance._builderActions.Add(r => r.Headers.Date = date);
+            _instance._builderActions.Add(delegate (HttpResponseMessage response)
+            {
+                EnsureCacheControlHeaders(response);
+                response.Headers.Date = date;
+            });
+           
             return _instance;
         }
 
@@ -53,7 +60,12 @@ namespace Cashew.Core.Tests.Helpers
 
         public ResponseBuilder Expires(DateTimeOffset date)
         {
-            _instance._builderActions.Add(r => r.Content.Headers.Expires = date);
+            _instance._builderActions.Add(delegate (HttpResponseMessage response)
+            {
+                EnsureCacheControlHeaders(response);
+                response.Content.Headers.Expires = date;
+            });
+            
             return _instance;
         }
 
@@ -96,6 +108,39 @@ namespace Cashew.Core.Tests.Helpers
             {
                 EnsureCacheControlHeaders(response);
                 response.Headers.CacheControl.ProxyRevalidate = true;
+            });
+
+            return _instance;
+        }
+
+        public ResponseBuilder WithETag(string tag)
+        {
+            _instance._builderActions.Add(delegate (HttpResponseMessage response)
+            {
+                EnsureCacheControlHeaders(response);
+                response.Headers.ETag = new EntityTagHeaderValue(tag);
+            });
+
+            return _instance;
+        }
+
+        public ResponseBuilder LastModified(DateTimeOffset lastModified)
+        {
+            _instance._builderActions.Add(delegate (HttpResponseMessage response)
+            {
+                EnsureCacheControlHeaders(response);
+                response.Content.Headers.LastModified = lastModified;
+            });
+
+            return _instance;
+        }
+
+        public ResponseBuilder WithStatusHeader(CacheStatus status)
+        {
+            _instance._builderActions.Add(delegate (HttpResponseMessage response)
+            {
+                EnsureCacheControlHeaders(response);
+                response.Headers.AddClientCacheStatusHeader(status);
             });
 
             return _instance;

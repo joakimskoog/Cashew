@@ -18,6 +18,12 @@ namespace Cashew.Core
         object Get(string key);
 
         /// <summary>
+        /// Removes the value associated with the given key from the cache.
+        /// </summary>
+        /// <param name="key">The key that is used to identify the value in the cache.</param>
+        void Remove(string key);
+
+        /// <summary>
         /// Puts a value associated with the given key into the cache.
         /// </summary>
         /// <param name="key">The key that is used to identify the value in the cache.</param>

@@ -30,6 +30,14 @@ namespace Cashew.Core.Headers
             return null;
         }
 
+
+        internal static void AddClientCacheStatusHeader(this HttpResponseHeaders headers, CacheStatus status)
+        {
+            if (headers == null) throw new ArgumentNullException(nameof(headers));
+            headers.Remove(CashewStatusHeader);
+            headers.Add(CashewStatusHeader, GetHeaderStringValue(status));
+        }
+
         private static string GetHeaderStringValue(CacheStatus status)
         {
             switch (status)

@@ -10,14 +10,19 @@ namespace Cashew.Adapters.CacheManager
 
         public CacheManagerAdapter(ICacheManager<object> cacheManager)
         {
-            if (cacheManager == null) throw new ArgumentNullException(nameof(cacheManager));
-            _cacheManager = cacheManager;
+            _cacheManager = cacheManager ?? throw new ArgumentNullException(nameof(cacheManager));
         }
 
         public object Get(string key)
         {
             if (key == null) throw new ArgumentNullException(nameof(key));
             return _cacheManager.Get(key);
+        }
+
+        public void Remove(string key)
+        {
+            if (key == null) throw new ArgumentNullException(nameof(key));
+            _cacheManager.Remove(key);
         }
 
         public void Put(string key, object value)
