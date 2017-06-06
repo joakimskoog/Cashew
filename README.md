@@ -41,7 +41,7 @@ Cashew provides a lot of customisation opportunities for its users. The most imp
 
 |Feature|Quickstart|In-depth|
 | ------------- | ------------- | ------------- |
-| Use any cache store | [Link]() | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
+| Use any cache store | [Link]() | [Wiki](#use-any-cache-store) |
 | Decide how cache keys are created | [Link](#decide-how-cache-keys-are-created) | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
 | Decide which status codes are cacheable | [Link](#cacheable-status-codes) | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
 
