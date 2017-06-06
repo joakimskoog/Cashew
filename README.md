@@ -21,23 +21,11 @@ PM> Install-Package Cashew.Adapters.CacheManager
 
 
 ## General features
-
-
-
-## HTTP Cache-Control Headers
-|Header|Aka|Quickstart|In-depth|
-| ------------- | ------------- | ------------- | ------------- |
-|[max-age](https://tools.ietf.org/html/rfc7234)|"I dont want cached responses older than this"| | |
-|[s-maxage](https://tools.ietf.org/html/rfc7234)|"I dont want cached responses older than this"| | |
-|[max-stale](https://tools.ietf.org/html/rfc7234)|"Stale responses are OK for this long"| | |
-|[min-fresh](https://tools.ietf.org/html/rfc7234)|"The response has to still be fresh for at least this long"| | |
-|[no-cache](https://tools.ietf.org/html/rfc7234)|"You must validate the cached response with the server| | |
-|[no-store](https://tools.ietf.org/html/rfc7234)|"DO NOT CACHE THIS OR I WILL MAKE YOUR LIFE MISERABLE!"| | |
-|[only-if-cached](https://tools.ietf.org/html/rfc7234)|"I only want a response if it's cached"| | |
-|[must-revalidate](https://tools.ietf.org/html/rfc7234)|"You MUST revalidate stale responses"| | |
-|[proxy-revalidate](https://tools.ietf.org/html/rfc7234)|"You MUST revalidate stale responses"| | |
-
-
+- No need to keep tabs on it, configure once and start running
+- Used as a DelegatingHandler inside the HttpClient meaning it's easy to use
+- Simple but powerful API
+- [ETag](https://en.wikipedia.org/wiki/HTTP_ETag)
+- [Vary Header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Vary)
 
 ## Cache stores
 
@@ -52,6 +40,19 @@ PM> Install-Package Cashew.Adapters.CacheManager
 | Custom | | |No| 
 
 *Provided that you use `Cashew.Adapters.CacheManager`
+
+## HTTP Cache-Control Headers
+|Header|Aka|Quickstart|In-depth|
+| ------------- | ------------- | ------------- | ------------- |
+|[max-age](https://tools.ietf.org/html/rfc7234)|"I dont want cached responses older than this"| | |
+|[s-maxage](https://tools.ietf.org/html/rfc7234)|"I dont want cached responses older than this"| | |
+|[max-stale](https://tools.ietf.org/html/rfc7234)|"Stale responses are OK for this long"| | |
+|[min-fresh](https://tools.ietf.org/html/rfc7234)|"The response has to still be fresh for at least this long"| | |
+|[no-cache](https://tools.ietf.org/html/rfc7234)|"You must validate the cached response with the server| | |
+|[no-store](https://tools.ietf.org/html/rfc7234)|"DO NOT CACHE THIS OR I WILL MAKE YOUR LIFE MISERABLE!"| | |
+|[only-if-cached](https://tools.ietf.org/html/rfc7234)|"I only want a response if it's cached"| | |
+|[must-revalidate](https://tools.ietf.org/html/rfc7234)|"You MUST revalidate stale responses"| | |
+|[proxy-revalidate](https://tools.ietf.org/html/rfc7234)|"You MUST revalidate stale responses"| | |
 
 ## Customisation
 Cashew provides a lot of customisation opportunities for its users. The most important ones are listed below:
