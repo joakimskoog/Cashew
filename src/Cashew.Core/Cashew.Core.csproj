@@ -4,6 +4,16 @@
     <TargetFrameworks>netstandard1.1;net45</TargetFrameworks>
     <AssemblyName>Cashew.Core</AssemblyName>
     <RootNamespace>Cashew.Core</RootNamespace>
+    <Version>0.5.0</Version>
+    <Authors>Joakim Skoog</Authors>
+    <Company>Joakim Skoog</Company>
+    <Copyright>Copyright (c) 2017 Joakim Skoog</Copyright>
+    <PackageLicenseUrl>https://github.com/joakimskoog/Cashew/blob/master/LICENSE.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/joakimskoog/Cashew</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/joakimskoog/Cashew</RepositoryUrl>
+    <PackageTags>http caching etag cache client httpclient</PackageTags>
+    <PackageId>Cashew.Core</PackageId>
+    <Product>Cashew.Core</Product>
   </PropertyGroup>
 
   <ItemGroup>
