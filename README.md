@@ -1,9 +1,6 @@
 # Cashew
 Cashew is a .NET library for caching responses easily with an HttpClient through an API that is simple and elegant yet powerful.
-There's support out of the box for the awesome [CacheManager](https://github.com/MichaCo/CacheManager) via the `Cashew.Adapters.CacheManager` package.
-
-Cashew is a .NET library for caching HTTP responses on  through an API that is simple and elegant yet powerful. 
-It's built on top of the awesome [CacheManager](https://github.com/MichaCo/CacheManager) with a focus on extensibility and being easy to use.
+There's support out of the box for the awesome [CacheManager](https://github.com/MichaCo/CacheManager) via the `Cashew.Adapters.CacheManager` package. Its aim is to focus on the HTTP part of caching and not worrying about how stuff is stored, meaning no half-arsed cache implementations!
 
 Cashew targets .NET 4.5 and .NET Standard 1.1 (.NET Core, Mono, Xamarin.iOS, Xamarin.Android, UWP and [more](https://github.com/dotnet/standard/blob/master/docs/versions.md)) meaning it can be used on all sorts of devices.
 
@@ -21,11 +18,10 @@ PM> Install-Package Cashew.Adapters.CacheManager
 
 
 ## General features
-- No need to keep tabs on it, configure once and start running
-- Used as a DelegatingHandler inside the HttpClient meaning it's easy to use
-- Simple but powerful API
-- [ETag](https://en.wikipedia.org/wiki/HTTP_ETag)
-- [Vary Header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Vary)
+- Extremely easy to use, all it takes is one line to configure the whole thing!
+- Simple but powerful API that allows customisation
+- [ETag support](https://en.wikipedia.org/wiki/HTTP_ETag)
+- [Vary Header support](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Vary)
 
 ## Cache stores
 
@@ -42,17 +38,17 @@ PM> Install-Package Cashew.Adapters.CacheManager
 *Provided that you use `Cashew.Adapters.CacheManager`
 
 ## HTTP Cache-Control Headers
-|Header|Aka|Quickstart|In-depth|
-| ------------- | ------------- | ------------- | ------------- |
-|[max-age](https://tools.ietf.org/html/rfc7234)|"I dont want cached responses older than this"| | |
-|[s-maxage](https://tools.ietf.org/html/rfc7234)|"I dont want cached responses older than this"| | |
-|[max-stale](https://tools.ietf.org/html/rfc7234)|"Stale responses are OK for this long"| | |
-|[min-fresh](https://tools.ietf.org/html/rfc7234)|"The response has to still be fresh for at least this long"| | |
-|[no-cache](https://tools.ietf.org/html/rfc7234)|"You must validate the cached response with the server| | |
-|[no-store](https://tools.ietf.org/html/rfc7234)|"DO NOT CACHE THIS OR I WILL MAKE YOUR LIFE MISERABLE!"| | |
-|[only-if-cached](https://tools.ietf.org/html/rfc7234)|"I only want a response if it's cached"| | |
-|[must-revalidate](https://tools.ietf.org/html/rfc7234)|"You MUST revalidate stale responses"| | |
-|[proxy-revalidate](https://tools.ietf.org/html/rfc7234)|"You MUST revalidate stale responses"| | |
+|Header|Aka|
+| ------------- | ------------- |
+|[max-age](https://tools.ietf.org/html/rfc7234)|"I dont want cached responses older than this"|
+|[s-maxage](https://tools.ietf.org/html/rfc7234)|"I dont want cached responses older than this"| 
+|[max-stale](https://tools.ietf.org/html/rfc7234)|"Stale responses are OK for this long"| 
+|[min-fresh](https://tools.ietf.org/html/rfc7234)|"The response has to still be fresh for at least this long"| 
+|[no-cache](https://tools.ietf.org/html/rfc7234)|"You must validate the cached response with the server| 
+|[no-store](https://tools.ietf.org/html/rfc7234)|"DO NOT CACHE THIS OR I WILL MAKE YOUR LIFE MISERABLE!"| 
+|[only-if-cached](https://tools.ietf.org/html/rfc7234)|"I only want a response if it's cached"| 
+|[must-revalidate](https://tools.ietf.org/html/rfc7234)|"You MUST revalidate stale responses"| 
+|[proxy-revalidate](https://tools.ietf.org/html/rfc7234)|"You MUST revalidate stale responses"| 
 
 ## Customisation
 Cashew provides a lot of customisation opportunities for its users. The most important ones are listed below:
@@ -64,8 +60,13 @@ Cashew provides a lot of customisation opportunities for its users. The most imp
 | Decide which status codes are cacheable | [Link](#cacheable-status-codes) | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
 
 # Usage
+For more in-depth information about the usage of Cashew, please refer to our [wiki](https://github.com/joakimskoog/Cashew/wiki).
 
 ## Configuring HttpClient
+```csharp
+//All it takes is one line to configure the whole thing!
+var httpClient = new HttpClient(new HttpCachingHandler(cache, new HttpStandardKeyStrategy(cache)));
+```
 
 
 ## Use any cache store
