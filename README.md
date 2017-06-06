@@ -33,7 +33,7 @@ PM> Install-Package Cashew.Adapters.CacheManager
 | [Redis](https://www.nuget.org/packages/CacheManager.StackExchange.Redis) |  |  |Yes*|
 | [Memcached](https://www.nuget.org/packages/CacheManager.Memcached) |  |  |Yes*|
 | [Couchbase](https://www.nuget.org/packages/CacheManager.Couchbase) |  |  |Yes*|
-| Custom | | |No| 
+| Custom | | |No, but it's super easy to implement your own.| 
 
 *Provided that you use `Cashew.Adapters.CacheManager`
 
