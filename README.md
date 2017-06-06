@@ -19,28 +19,32 @@ PM> Install-Package Cashew.Adapters.CacheManager
 
 ## Features
 
+
+
+
 ### Cache stores
 
-|Type|Out of the box?|More Info|
-| ------------- | ------------- | ------------- |
-| Dictionary | Yes* |  |
-| [System.Runtime.Caching.MemoryCache](https://msdn.microsoft.com/en-us/library/system.runtime.caching.memorycache(v=vs.110).aspx) | Yes* | |
-| [Microsoft.Extensions.Caching.Memory](https://github.com/aspnet/Caching/tree/dev/src/Microsoft.Extensions.Caching.Memory) | Yes* |  |
-| [Redis](https://www.nuget.org/packages/CacheManager.StackExchange.Redis) | Yes |  |
-| [Memcached](https://www.nuget.org/packages/CacheManager.Memcached) | Yes* |  |
-| [Couchbase](https://www.nuget.org/packages/CacheManager.Couchbase) | Yes* |  |
-| Custom | No | [Information on how to roll your own cache store](https://github.com/joakimskoog/Cashew) |
+|Type|Quickstart|In-depth|Out of the box?|
+| ------------- | ------------- | ------------- |------------- |
+|Dictionary|  |  |Yes*|
+|[System.Runtime.Caching.MemoryCache](https://msdn.microsoft.com/en-us/library/system.runtime.caching.memorycache(v=vs.110).aspx) |  | |Yes*|
+|[Microsoft.Extensions.Caching.Memory](https://github.com/aspnet/Caching/tree/dev/src/Microsoft.Extensions.Caching.Memory)|||Yes*|
+| [Redis](https://www.nuget.org/packages/CacheManager.StackExchange.Redis) |  |  |Yes*|
+| [Memcached](https://www.nuget.org/packages/CacheManager.Memcached) |  |  |Yes*|
+| [Couchbase](https://www.nuget.org/packages/CacheManager.Couchbase) |  |  |Yes*|
+| Custom | | |No| 
 
 *Provided that you use the `CacheManager` package.
 
 ### Customisation
 Cashew provides a lot of customisation opportunities for its users. The most important ones are listed below:
 
-|Customisation feature|More info|
-| ------------- | ------------- |
-| Use any cache technology | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
-| Decide how cache keys are created | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
-| Decide which status codes are cacheable | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
+|Feature|Quickstart|In-depth|
+| ------------- | ------------- | ------------- |
+| Use any cache store | [abc]() | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
+| Decide how cache keys are created | [abc]() | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
+| Decide which status codes are cacheable | [abc]() | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
+
 
 ### More information
 If you're interested in quick code examples for all Cashew features, refer to the section below. If you instead want a more in-depth explanation on each and every feature, please refer to the [Wiki](https://github.com/joakimskoog/Cashew/wiki)
