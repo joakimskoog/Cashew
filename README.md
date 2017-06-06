@@ -7,7 +7,7 @@ It's built on top of the awesome [CacheManager](https://github.com/MichaCo/Cache
 
 Cashew targets .NET 4.5 and .NET Standard 1.1 (.NET Core, Mono, Xamarin.iOS, Xamarin.Android, UWP and [more](https://github.com/dotnet/standard/blob/master/docs/versions.md)) meaning it can be used on all sorts of devices.
 
-## Installation
+# Installation
 The latest versions of the packages are available on NuGet. To install, run the following command if you want to roll your own cache:
 ```
 PM> Install-Package Cashew.Core
@@ -17,12 +17,12 @@ or the command below if you want to utilise the power of [CacheManager](https://
 PM> Install-Package Cashew.Adapters.CacheManager
 ```
 
-## Features
+# Features
 
 
 
 
-### Cache stores
+## Cache stores
 
 |Type|Quickstart|In-depth|Out of the box?|
 | ------------- | ------------- | ------------- |------------- |
@@ -36,21 +36,23 @@ PM> Install-Package Cashew.Adapters.CacheManager
 
 *Provided that you use the `CacheManager` package.
 
-### Customisation
+## Customisation
 Cashew provides a lot of customisation opportunities for its users. The most important ones are listed below:
 
 |Feature|Quickstart|In-depth|
 | ------------- | ------------- | ------------- |
-| Use any cache store | [abc]() | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
-| Decide how cache keys are created | [abc]() | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
-| Decide which status codes are cacheable | [abc]() | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
+| Use any cache store | [Link]() | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
+| Decide how cache keys are created | [Link]() | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
+| Decide which status codes are cacheable | [Link](#cacheable-status-codes) | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
+
+# Usage
+
+## Cacheable status codes
+```csharp
+//We only want to cache responses with status 200
+httpCachingHandler.CacheableStatusCodes = new[] {HttpStatusCode.OK};
+```
 
 
-### More information
-If you're interested in quick code examples for all Cashew features, refer to the section below. If you instead want a more in-depth explanation on each and every feature, please refer to the [Wiki](https://github.com/joakimskoog/Cashew/wiki)
 
-
-## Code examples
-
-
-## Contributing
+# Contributing
