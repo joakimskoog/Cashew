@@ -14,6 +14,7 @@
     <PackageTags>http caching etag cache client httpclient</PackageTags>
     <PackageId>Cashew.Core</PackageId>
     <Product>Cashew.Core</Product>
+    <Description>HTTP caching with HttpClient through a simple and elegant API.</Description>
   </PropertyGroup>
 
   <ItemGroup>
