@@ -96,3 +96,4 @@ httpCachingHandler.CacheableStatusCodes = new[] { HttpStatusCode.OK };
 
 
 # Contributing
+Please refer to our [guidelines](https://github.com/joakimskoog/Cashew/wiki/Contributing) on contributing.
