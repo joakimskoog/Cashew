@@ -40,8 +40,8 @@ PM> Install-Package Cashew.Adapters.CacheManager
 ## HTTP Cache-Control Headers
 |Header|Aka|
 | ------------- | ------------- |
-|[max-age](https://tools.ietf.org/html/rfc7234)|"I dont want cached responses older than this"|
-|[s-maxage](https://tools.ietf.org/html/rfc7234)|"I dont want cached responses older than this"| 
+|[max-age](https://tools.ietf.org/html/rfc7234)|"I don't want cached responses older than this"|
+|[s-maxage](https://tools.ietf.org/html/rfc7234)|"I don't want cached responses older than this"| 
 |[max-stale](https://tools.ietf.org/html/rfc7234)|"Stale responses are OK for this long"| 
 |[min-fresh](https://tools.ietf.org/html/rfc7234)|"The response has to still be fresh for at least this long"| 
 |[no-cache](https://tools.ietf.org/html/rfc7234)|"You must validate the cached response with the server| 
@@ -60,7 +60,7 @@ Cashew provides a lot of customisation opportunities for its users. The most imp
 | Decide which status codes are cacheable | [Link](#cacheable-status-codes) | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
 
 # Usage
-For more in-depth information about the usage of Cashew, please refer to our [wiki](https://github.com/joakimskoog/Cashew/wiki).
+For more in-depth information on how to use Cashew, please refer to our [wiki](https://github.com/joakimskoog/Cashew/wiki).
 
 ## Configuring HttpClient
 ```csharp
@@ -85,7 +85,6 @@ var uriKeyStrategy = new RequestUriKeyStrategy();
 
 //We pass our newly created key strategy in the constructor and watch the magic happen!
 var httpCachingHandler = new HttpCachingHandler(memoryCache, uriKeyStrategy);
-
 ```
 
 ## Cacheable status codes
@@ -93,8 +92,6 @@ var httpCachingHandler = new HttpCachingHandler(memoryCache, uriKeyStrategy);
 //We only want to cache responses with status 200
 httpCachingHandler.CacheableStatusCodes = new[] { HttpStatusCode.OK };
 ```
-
-
 
 # Contributing
 Please refer to our [guidelines](https://github.com/joakimskoog/Cashew/wiki/Contributing) on contributing.
