@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using Cashew.Headers;
@@ -41,6 +42,9 @@ namespace Cashew
             {
                 return await base.SendAsync(request, cancellationToken);
             }
+
+            //This does not seem entirely correct, should we have some other form of handling when request.CacheControl is null?
+            EnsureRequestCacheControl(request);
 
             var key = _keyStrategy.GetCacheKey(request);
             var cachedResponse = _cache.Get<HttpResponseMessage>(key);
@@ -175,8 +179,6 @@ namespace Cashew
                 return false;
             }
 
-            //todo: What do we do if request.Headers.CacheControl is null?
-
             if (requestCacheControl.NoCache || responseCacheControl.NoCache)
             {
                 return false;
@@ -209,6 +211,14 @@ namespace Cashew
             }
 
             return false;
+        }
+
+        private static void EnsureRequestCacheControl(HttpRequestMessage request)
+        {
+            if (request.Headers.CacheControl == null)
+            {
+                request.Headers.CacheControl = new CacheControlHeaderValue();
+            }
         }
 
         private bool IsResponseCacheable(HttpResponseMessage response)
