@@ -30,6 +30,7 @@ namespace Cashew
         {
             _cache = cache ?? throw new ArgumentNullException(nameof(cache));
             _keyStrategy = keyStrategy ?? throw new ArgumentNullException(nameof(keyStrategy));
+            InnerHandler = new HttpClientHandler();
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)

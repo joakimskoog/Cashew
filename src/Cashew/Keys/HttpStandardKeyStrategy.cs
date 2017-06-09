@@ -6,6 +6,7 @@ namespace Cashew.Keys
 {
     public class HttpStandardKeyStrategy : ICacheKeyStrategy
     {
+        private const string VaryHeadersCacheKeyPrefix = "Vary:";
         private const string VaryHeaderDelimiter = "_";
 
         private readonly IHttpCache _cache;
@@ -23,7 +24,7 @@ namespace Cashew.Keys
             if (request == null) throw new ArgumentNullException(nameof(request));
 
             var uri = GetUri(request);
-            var varyHeaders = _cache.Get<string>(uri);
+            var varyHeaders = _cache.Get<string>($"{VaryHeadersCacheKeyPrefix}{uri}");
 
              return $"{uri}{varyHeaders}";
         }
@@ -37,7 +38,7 @@ namespace Cashew.Keys
             var varyHeaders = request.Headers.Where(x => response.Headers.Vary.Any(y => y.Equals(x.Key, StringComparison.CurrentCultureIgnoreCase))).SelectMany(o => o.Value);
             var formattedVaryheaderString = varyHeaders.Aggregate("", (current, varyHeader) => current + (VaryHeaderDelimiter + varyHeader));
 
-            _cache.Put(uri, formattedVaryheaderString);
+            _cache.Put($"{VaryHeadersCacheKeyPrefix}{uri}", formattedVaryheaderString);
             
             return $"{uri}{formattedVaryheaderString}";
         }
