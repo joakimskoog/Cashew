@@ -56,8 +56,8 @@ Cashew provides a lot of customisation opportunities for its users. The most imp
 |Feature|Quickstart|In-depth|
 | ------------- | ------------- | ------------- |
 | Use any cache store | [Link](#use-any-cache-store) | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
-| Decide how cache keys are created | [Link](#decide-how-cache-keys-are-created) | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
-| Decide which status codes are cacheable | [Link](#cacheable-status-codes) | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
+| Decide how cache keys are created | [Link](#decide-how-cache-keys-are-created) | [Wiki](https://github.com/joakimskoog/Cashew/wiki/CacheKeyStrategy) |
+| Decide which status codes are cacheable | [Link](#cacheable-status-codes) | [Wiki](https://github.com/joakimskoog/Cashew/wiki/HTTP-Status-Codes) |
 
 # Usage
 For more in-depth information on how to use Cashew, please refer to our [wiki](https://github.com/joakimskoog/Cashew/wiki).
