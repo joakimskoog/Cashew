@@ -87,6 +87,17 @@ var uriKeyStrategy = new RequestUriKeyStrategy();
 var httpCachingHandler = new HttpCachingHandler(memoryCache, uriKeyStrategy);
 ```
 
+## Decide how query strings are handled
+```csharp
+//The default implementation of ICacheKeyStrategy is HttpStandardKeyStrategy. You can configure it to handle query strings in two ways.
+
+//Using CacheKeySetting.Standard will result in a different cache key each time the query string changes
+var queryStringStrategy = new HttpStandardKeyStrategy(cache, CacheKeySetting.Standard);
+
+//Using CacheKeySetting.IgnoreQueryString will result in the same key even if the query string changes.
+var uriStrategy = new HttpStandardKeyStrategy(cache, CacheKeySetting.IgnoreQueryString);
+```
+
 ## Cacheable status codes
 ```csharp
 //We only want to cache responses with status 200
