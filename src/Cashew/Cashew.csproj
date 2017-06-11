@@ -15,6 +15,9 @@
     <PackageId>Cashew</PackageId>
     <Product>Cashew</Product>
     <Description>HTTP caching with HttpClient through a simple and elegant API.</Description>
+    <PackageReleaseNotes>0.5.0
+---------------------
+ - Initial release</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
