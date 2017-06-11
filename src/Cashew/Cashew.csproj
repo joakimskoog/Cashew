@@ -18,7 +18,7 @@
     <PackageReleaseNotes>0.5.0
 ---------------------
  - Initial release</PackageReleaseNotes>
-    <PackageIconUrl>https://github.com/joakimskoog/Cashew/blob/master/Cashew-Logo.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/joakimskoog/Cashew/master/Cashew-Logo.png</PackageIconUrl>
   </PropertyGroup>
 
   <ItemGroup>
