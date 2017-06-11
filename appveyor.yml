@@ -12,6 +12,10 @@ skip_commits:
   files:
   - LICENSE.md
   - README.md
+
+branches:
+  only:
+    - release
   
 init:
   - git config --global core.autocrlf input  
@@ -25,6 +29,13 @@ build:
   project: Cashew.sln    # path to Visual Studio solution or project   
   verbosity: normal
 
+after_build:
+  - dotnet pack .\src\Cashew\Cashew.csproj --configuration Release  
+  - dotnet pack .\src\Cashew.Adapters.CacheManager\Cashew.Adapters.CacheManager.csproj --configuration Release  
+
 test:
   assemblies:
     - '**\*.Tests.dll'
+
+artifacts:
+  - path: '**\Cashew.*.nupkg' # find all NuGet packages recursively
