@@ -4,6 +4,10 @@ There's support out of the box for the awesome [CacheManager](https://github.com
 
 Cashew targets .NET 4.5 and .NET Standard 1.1 (.NET Core, Mono, Xamarin.iOS, Xamarin.Android, UWP and [more](https://github.com/dotnet/standard/blob/master/docs/versions.md)) meaning it can be used on all sorts of devices.
 
+[![Build Status](https://ci.appveyor.com/api/projects/status/github/joakimskoog/Cashew?branch=release&svg=true
+)](https://ci.appveyor.com/project/joakimskoog/cashew/history)
+[![NuGet](https://img.shields.io/nuget/v/Cashew.svg)](https://www.nuget.org/packages/Cashew/)
+
 # Installation
 The latest versions of the packages are available on NuGet. To install, run the following command if you want to roll your own cache:
 ```
