@@ -8,6 +8,8 @@ Cashew targets .NET 4.5 and .NET Standard 1.1 (.NET Core, Mono, Xamarin.iOS, Xam
 )](https://ci.appveyor.com/project/joakimskoog/cashew/history)
 [![NuGet](https://img.shields.io/nuget/v/Cashew.svg)](https://www.nuget.org/packages/Cashew/)
 
+![Cashew-logo](https://raw.githubusercontent.com/joakimskoog/Cashew/master/Cashew-Logo.png)
+
 # Installation
 The latest versions of the packages are available on NuGet. To install, run the following command if you want to roll your own cache:
 ```
