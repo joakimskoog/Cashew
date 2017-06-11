@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard1.1;net45</TargetFrameworks>
     <AssemblyName>Cashew</AssemblyName>
     <RootNamespace>Cashew</RootNamespace>
-    <Version>0.5.0</Version>
+    <Version>0.5.1</Version>
     <Authors>Joakim Skoog</Authors>
     <Company>Joakim Skoog</Company>
     <Copyright>Copyright (c) 2017 Joakim Skoog</Copyright>
@@ -15,10 +15,18 @@
     <PackageId>Cashew</PackageId>
     <Product>Cashew</Product>
     <Description>HTTP caching with HttpClient through a simple and elegant API.</Description>
-    <PackageReleaseNotes>0.5.0
+    <PackageReleaseNotes>0.5.1
+---------------------
+ - Added XML docs
+
+0.5.0
 ---------------------
  - Initial release</PackageReleaseNotes>
     <PackageIconUrl>https://raw.githubusercontent.com/joakimskoog/Cashew/master/Cashew-Logo.png</PackageIconUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard1.1|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard1.1\Cashew.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
