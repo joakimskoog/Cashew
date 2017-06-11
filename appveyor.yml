@@ -23,4 +23,4 @@ before_build:
 build:
   parallel: true                 # enable MSBuild parallel builds
   project: Cashew.sln    # path to Visual Studio solution or project   
-  verbosity: detailed
+  verbosity: normal
