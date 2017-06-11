@@ -25,15 +25,15 @@ PM> Install-Package Cashew.Adapters.CacheManager
 
 ## Cache stores
 
-|Type|Quickstart|In-depth|Out of the box?|
-| ------------- | ------------- | ------------- |------------- |
-|Dictionary|  |  |Yes*|
-|[System.Runtime.Caching.MemoryCache](https://msdn.microsoft.com/en-us/library/system.runtime.caching.memorycache(v=vs.110).aspx) |  | |Yes*|
-|[Microsoft.Extensions.Caching.Memory](https://github.com/aspnet/Caching/tree/dev/src/Microsoft.Extensions.Caching.Memory)|||Yes*|
-| [Redis](https://www.nuget.org/packages/CacheManager.StackExchange.Redis) |  |  |Yes*|
-| [Memcached](https://www.nuget.org/packages/CacheManager.Memcached) |  |  |Yes*|
-| [Couchbase](https://www.nuget.org/packages/CacheManager.Couchbase) |  |  |Yes*|
-| Custom | | |No, but it's super easy to implement your own.| 
+|Type|Out of the box?|
+| ------------- | ------------- |
+|Dictionary|Yes*|
+|[System.Runtime.Caching.MemoryCache](https://msdn.microsoft.com/en-us/library/system.runtime.caching.memorycache(v=vs.110).aspx)|Yes*|
+|[Microsoft.Extensions.Caching.Memory](https://github.com/aspnet/Caching/tree/dev/src/Microsoft.Extensions.Caching.Memory)|Yes*|
+| [Redis](https://www.nuget.org/packages/CacheManager.StackExchange.Redis) |Yes*|
+| [Memcached](https://www.nuget.org/packages/CacheManager.Memcached) |Yes*|
+| [Couchbase](https://www.nuget.org/packages/CacheManager.Couchbase) |Yes*|
+| Custom |No, but it's super easy to implement your own.| 
 
 *Provided that you use `Cashew.Adapters.CacheManager`
 
