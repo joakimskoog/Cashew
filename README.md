@@ -25,15 +25,15 @@ PM> Install-Package Cashew.Adapters.CacheManager
 
 ## Cache stores
 
-|Type|Quickstart|In-depth|Out of the box?|
-| ------------- | ------------- | ------------- |------------- |
-|Dictionary|  |  |Yes*|
-|[System.Runtime.Caching.MemoryCache](https://msdn.microsoft.com/en-us/library/system.runtime.caching.memorycache(v=vs.110).aspx) |  | |Yes*|
-|[Microsoft.Extensions.Caching.Memory](https://github.com/aspnet/Caching/tree/dev/src/Microsoft.Extensions.Caching.Memory)|||Yes*|
-| [Redis](https://www.nuget.org/packages/CacheManager.StackExchange.Redis) |  |  |Yes*|
-| [Memcached](https://www.nuget.org/packages/CacheManager.Memcached) |  |  |Yes*|
-| [Couchbase](https://www.nuget.org/packages/CacheManager.Couchbase) |  |  |Yes*|
-| Custom | | |No, but it's super easy to implement your own.| 
+|Type|Out of the box?|
+| ------------- | ------------- |
+|Dictionary|Yes*|
+|[System.Runtime.Caching.MemoryCache](https://msdn.microsoft.com/en-us/library/system.runtime.caching.memorycache(v=vs.110).aspx)|Yes*|
+|[Microsoft.Extensions.Caching.Memory](https://github.com/aspnet/Caching/tree/dev/src/Microsoft.Extensions.Caching.Memory)|Yes*|
+| [Redis](https://www.nuget.org/packages/CacheManager.StackExchange.Redis) |Yes*|
+| [Memcached](https://www.nuget.org/packages/CacheManager.Memcached) |Yes*|
+| [Couchbase](https://www.nuget.org/packages/CacheManager.Couchbase) |Yes*|
+| Custom | [No, but it's super easy to implement your own](https://github.com/joakimskoog/Cashew/wiki/Custom-cache).| 
 
 *Provided that you use `Cashew.Adapters.CacheManager`
 
@@ -55,9 +55,9 @@ Cashew provides a lot of customisation opportunities for its users. The most imp
 
 |Feature|Quickstart|In-depth|
 | ------------- | ------------- | ------------- |
-| Use any cache store | [Link](#use-any-cache-store) | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
-| Decide how cache keys are created | [Link](#decide-how-cache-keys-are-created) | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
-| Decide which status codes are cacheable | [Link](#cacheable-status-codes) | [Wiki](https://github.com/joakimskoog/Cashew/wiki) |
+| Use any cache store | [Link](#use-any-cache-store) | [Wiki](https://github.com/joakimskoog/Cashew/wiki/Custom-cache) |
+| Decide how cache keys are created | [Link](#decide-how-cache-keys-are-created) | [Wiki](https://github.com/joakimskoog/Cashew/wiki/CacheKeyStrategy) |
+| Decide which status codes are cacheable | [Link](#cacheable-status-codes) | [Wiki](https://github.com/joakimskoog/Cashew/wiki/HTTP-Status-Codes) |
 
 # Usage
 For more in-depth information on how to use Cashew, please refer to our [wiki](https://github.com/joakimskoog/Cashew/wiki).
@@ -85,6 +85,17 @@ var uriKeyStrategy = new RequestUriKeyStrategy();
 
 //We pass our newly created key strategy in the constructor and watch the magic happen!
 var httpCachingHandler = new HttpCachingHandler(memoryCache, uriKeyStrategy);
+```
+
+## Decide how query strings are handled
+```csharp
+//The default implementation of ICacheKeyStrategy is HttpStandardKeyStrategy. You can configure it to handle query strings in two ways.
+
+//Using CacheKeySetting.Standard will result in a different cache key each time the query string changes
+var queryStringStrategy = new HttpStandardKeyStrategy(cache, CacheKeySetting.Standard);
+
+//Using CacheKeySetting.IgnoreQueryString will result in the same key even if the query string changes.
+var uriStrategy = new HttpStandardKeyStrategy(cache, CacheKeySetting.IgnoreQueryString);
 ```
 
 ## Cacheable status codes
