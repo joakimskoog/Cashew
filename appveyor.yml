@@ -24,3 +24,7 @@ build:
   parallel: true                 # enable MSBuild parallel builds
   project: Cashew.sln    # path to Visual Studio solution or project   
   verbosity: normal
+
+test:
+  assemblies:
+    - '**\*.Tests.dll'
