@@ -10,6 +10,9 @@ using Cashew.Keys;
 
 namespace Cashew
 {
+    /// <summary>
+    /// The main class of this library, is supposed to be sent into the <see cref="HttpClient"/> constructor.
+    /// </summary>
     public class HttpCachingHandler : DelegatingHandler
     {
         private readonly IHttpCache _cache;
@@ -27,6 +30,11 @@ namespace Cashew
             HttpStatusCode.RequestUriTooLong, HttpStatusCode.NotImplemented,
         };
 
+        /// <summary>
+        /// Initialises a new instance of the <see cref="HttpCachingHandler"/> class.
+        /// </summary>
+        /// <param name="cache">The <see cref="IHttpCache"/> that will be used to store HTTP responses.</param>
+        /// <param name="keyStrategy">The <see cref="ICacheKeyStrategy"/> that will be used to create cache keys.</param>
         public HttpCachingHandler(IHttpCache cache, ICacheKeyStrategy keyStrategy)
         {
             _cache = cache ?? throw new ArgumentNullException(nameof(cache));

@@ -4,6 +4,9 @@ using System.Net.Http;
 
 namespace Cashew.Keys
 {
+    /// <summary>
+    /// The default implementation of <see cref="ICacheKeyStrategy"/> that is HTTP standard compliant with support for the vary header.
+    /// </summary>
     public class HttpStandardKeyStrategy : ICacheKeyStrategy
     {
         private const string VaryHeadersCacheKeyPrefix = "Vary:";
@@ -12,10 +15,14 @@ namespace Cashew.Keys
         private readonly IHttpCache _cache;
         private readonly CacheKeySetting _cacheKeySetting;
 
+        /// <summary>
+        /// Initialises a new instance of the <see cref="HttpStandardKeyStrategy"/> class.
+        /// </summary>
+        /// <param name="cache">The <see cref="IHttpCache"/> that will be used to store vary headers.</param>
+        /// <param name="cacheKeySetting">The <see cref="CacheKeySetting"/> that will be used to determine which part of the URI that will be used to create the key.</param>
         public HttpStandardKeyStrategy(IHttpCache cache, CacheKeySetting cacheKeySetting = CacheKeySetting.Standard)
         {
-            if (cache == null) throw new ArgumentNullException(nameof(cache));
-            _cache = cache;
+            _cache = cache ?? throw new ArgumentNullException(nameof(cache));
             _cacheKeySetting = cacheKeySetting;
         }
 
@@ -35,6 +42,8 @@ namespace Cashew.Keys
             if (response == null) throw new ArgumentNullException(nameof(response));
 
             var uri = GetUri(request);
+
+            //todo: Simplify this
             var varyHeaders = request.Headers.Where(x => response.Headers.Vary.Any(y => y.Equals(x.Key, StringComparison.CurrentCultureIgnoreCase))).SelectMany(o => o.Value);
             var formattedVaryheaderString = varyHeaders.Aggregate("", (current, varyHeader) => current + (VaryHeaderDelimiter + varyHeader));
 
