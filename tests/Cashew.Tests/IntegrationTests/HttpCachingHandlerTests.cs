@@ -88,16 +88,15 @@ namespace Cashew.Tests.IntegrationTests
         [Fact]
         public async Task CachedResponse_ContentIsReadMultipleTimesWithReadAsAsync_StreamIsNotConsumed()
         {
-            var firstResponse = await _client.SendAsync(RequestBuilder.Request(HttpMethod.Get, Url).WithMaxStale().Build());
-            var firstDto = await firstResponse.Content.ReadAsAsync<SimpleDto>(new MediaTypeFormatter[] { new JsonMediaTypeFormatter() });
-            var secondResponse = await _client.SendAsync(RequestBuilder.Request(HttpMethod.Get, Url).WithMaxStale().Build());
-            var secondDto = await secondResponse.Content.ReadAsAsync<SimpleDto>(new MediaTypeFormatter[] { new JsonMediaTypeFormatter() });
+            for (int i = 0; i < 5; i++)
+            {
+                var response = await _client.SendAsync(RequestBuilder.Request(HttpMethod.Get, Url).WithMaxStale().Build());
+                var dto = await response.Content.ReadAsAsync<SimpleDto>(new MediaTypeFormatter[] { new JsonMediaTypeFormatter() });
 
-            Assert.NotNull(firstDto);
-            Assert.NotNull(secondDto);
-            Assert.Equal("abcdef", firstDto.Value);
-            Assert.Equal("abcdef", secondDto.Value);
-            Assert.Equal(firstDto.Value, secondDto.Value);
+                Assert.NotNull(response);
+                Assert.NotNull(dto);
+                Assert.Equal("abcdef", dto.Value);
+            }
         }
     }
 
