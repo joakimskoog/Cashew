@@ -34,10 +34,11 @@ namespace Cashew
 
     internal static class HttpCacheExtensions
     {
-        internal static T Get<T>(this IHttpCache cache, string key)
+        internal static T Get<T>(this IHttpCache cache, string key) where T:class
         {
             if (cache == null) throw new ArgumentNullException(nameof(cache));
-            return (T)cache.Get(key);
+
+            return cache.Get(key) as T;
         }
     }
 }

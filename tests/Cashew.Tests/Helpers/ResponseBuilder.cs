@@ -146,6 +146,17 @@ namespace Cashew.Tests.Helpers
             return _instance;
         }
 
+        public ResponseBuilder WithContent(HttpContent content)
+        {
+            _instance._builderActions.Add(delegate(HttpResponseMessage response)
+            {
+                EnsureCacheControlHeaders(response);
+                response.Content = content;
+            });
+
+            return _instance;
+        }
+
         private static void EnsureCacheControlHeaders(HttpResponseMessage response)
         {
             if (response.Headers.CacheControl == null)

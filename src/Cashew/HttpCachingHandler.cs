@@ -55,7 +55,8 @@ namespace Cashew
             EnsureRequestCacheControl(request);
 
             var key = _keyStrategy.GetCacheKey(request);
-            var cachedResponse = _cache.Get<HttpResponseMessage>(key);
+            var serializedCachedResponse = _cache.Get<SerializedHttpResponseMessage>(key);
+            var cachedResponse = serializedCachedResponse?.ParseHttpResponseMessage();
 
             if (cachedResponse != null)
             {
@@ -68,7 +69,8 @@ namespace Cashew
                     cachedResponse.Headers.AddClientCacheStatusHeader(CacheStatus.Hit);
                     return cachedResponse;
                 }
-
+                //var a = new HttpMessageContent(null);
+                //  new HttpMessageContent();
                 var isStaleResponseAcceptable = IsStaleResponseAcceptable(request, cachedResponse, currentAge, freshnessLifetime);
                 if (isStaleResponseAcceptable)
                 {
@@ -94,10 +96,10 @@ namespace Cashew
 
             var serverResponse = await base.SendAsync(request, cancellationToken);
 
-            return HandleServerResponse(request, serverResponse, key, cachedResponse);
+            return await HandleServerResponse(request, serverResponse, key, serializedCachedResponse);
         }
 
-        private HttpResponseMessage HandleServerResponse(HttpRequestMessage request, HttpResponseMessage serverResponse, string cacheKey, HttpResponseMessage cachedResponse)
+        private async Task<HttpResponseMessage> HandleServerResponse(HttpRequestMessage request, HttpResponseMessage serverResponse, string cacheKey, SerializedHttpResponseMessage serializedCachedResponse)
         {
             if (serverResponse == null)
             {
@@ -105,6 +107,9 @@ namespace Cashew
             }
 
             var updatedCacheKey = _keyStrategy.GetCacheKey(request, serverResponse);
+
+            var cachedResponse = serializedCachedResponse?.Response;
+
 
             var cashewStatusHeader = cachedResponse?.Headers.GetCashewStatusHeader();
             var wasRevalidated = cashewStatusHeader.HasValue && cashewStatusHeader.Value == CacheStatus.Revalidated;
@@ -120,7 +125,7 @@ namespace Cashew
                     cachedResponse.RequestMessage = request;
                     cachedResponse.Headers.Date = SystemClock.UtcNow;
 
-                    _cache.Put(cacheKey, cachedResponse);
+                    _cache.Put(cacheKey, serializedCachedResponse);
 
                     //We need to dispose the response from the server since we're not returning it and because of that the pipeline will not dispose it.
                     serverResponse.Dispose();
@@ -131,19 +136,21 @@ namespace Cashew
                 if (isResponseCacheable)
                 {
                     _cache.Remove(cacheKey);
-                    _cache.Put(updatedCacheKey, serverResponse);
+                    var serializedResponse = await SerializedHttpResponseMessage.Create(serverResponse);
+                    _cache.Put(updatedCacheKey, serializedResponse);
                 }
             }
             else if (isResponseCacheable)
             {
-                _cache.Put(updatedCacheKey, serverResponse);
+                var serializedResponse = await SerializedHttpResponseMessage.Create(serverResponse);
+                _cache.Put(updatedCacheKey, serializedResponse);
                 serverResponse.Headers.AddClientCacheStatusHeader(CacheStatus.Miss);
             }
             else
             {
                 serverResponse.Headers.AddClientCacheStatusHeader(CacheStatus.Miss);
             }
-            
+
             return serverResponse;
         }
 
