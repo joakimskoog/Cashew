@@ -56,7 +56,7 @@ namespace Cashew
 
             var key = _keyStrategy.GetCacheKey(request);
             var serializedCachedResponse = _cache.Get<SerializedHttpResponseMessage>(key);
-            var cachedResponse = serializedCachedResponse?.ParseHttpResponseMessage();
+            var cachedResponse = serializedCachedResponse?.ParseHttpResponseMessage(); //todo: Explain why we need this for now
 
             if (cachedResponse != null)
             {

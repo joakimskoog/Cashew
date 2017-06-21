@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 [assembly: InternalsVisibleTo("Cashew.Tests")]
 namespace Cashew
 {
+    //todo: Add comments explaining why we need this class for now
     internal class SerializedHttpResponseMessage
     {
         public HttpResponseMessage Response { get; set; }

@@ -46,8 +46,6 @@ namespace Cashew.Tests.IntegrationTests
             _client = new HttpClient(_cachingHandler);
         }
 
-        #region Response content
-
         [Fact]
         public async Task CachedResponse_ContentIsReadMultipleTimesWithReadAsByteArray_StreamIsNotConsumed()
         {
@@ -101,8 +99,6 @@ namespace Cashew.Tests.IntegrationTests
             Assert.Equal("abcdef", secondDto.Value);
             Assert.Equal(firstDto.Value, secondDto.Value);
         }
-
-        #endregion
     }
 
     public class SimpleDto
