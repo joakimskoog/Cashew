@@ -69,8 +69,7 @@ namespace Cashew
                     cachedResponse.Headers.AddClientCacheStatusHeader(CacheStatus.Hit);
                     return cachedResponse;
                 }
-                //var a = new HttpMessageContent(null);
-                //  new HttpMessageContent();
+              
                 var isStaleResponseAcceptable = IsStaleResponseAcceptable(request, cachedResponse, currentAge, freshnessLifetime);
                 if (isStaleResponseAcceptable)
                 {
