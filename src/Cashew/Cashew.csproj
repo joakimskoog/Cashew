@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard1.1;net45</TargetFrameworks>
     <AssemblyName>Cashew</AssemblyName>
     <RootNamespace>Cashew</RootNamespace>
-    <Version>0.5.3</Version>
+    <Version>0.6.0</Version>
     <Authors>Joakim Skoog</Authors>
     <Company>Joakim Skoog</Company>
     <Copyright>Copyright (c) 2017 Joakim Skoog</Copyright>
@@ -15,7 +15,12 @@
     <PackageId>Cashew</PackageId>
     <Product>Cashew</Product>
     <Description>HTTP caching with HttpClient through a simple and elegant API.</Description>
-    <PackageReleaseNotes>0.5.3
+    <PackageReleaseNotes>
+0.6.0
+---------------------
+ - Added new constructor that takes an HttpMessageHandler as a parameter.
+
+0.5.3
 ---------------------
  - Fixed bug where content stream would be consumed when reading multiple times with the ReadAs extension method
 
