@@ -31,15 +31,23 @@ namespace Cashew
         };
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="HttpCachingHandler"/> class.
+        /// Initialises a new instance of the <see cref="HttpCachingHandler"/> class with the default message handler.
         /// </summary>
         /// <param name="cache">The <see cref="IHttpCache"/> that will be used to store HTTP responses.</param>
         /// <param name="keyStrategy">The <see cref="ICacheKeyStrategy"/> that will be used to create cache keys.</param>
-        public HttpCachingHandler(IHttpCache cache, ICacheKeyStrategy keyStrategy)
+        public HttpCachingHandler(IHttpCache cache, ICacheKeyStrategy keyStrategy) : this(cache, keyStrategy, new HttpClientHandler()) { }
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="HttpCachingHandler"/> class with the given <see cref="HttpMessageHandler"/>
+        /// </summary>
+        /// <param name="cache">The <see cref="IHttpCache"/>; that will be used to store HTTP responses.</param>
+        /// <param name="keyStrategy">The <see cref="ICacheKeyStrategy"/> that will be used to create cache keys.</param>
+        /// <param name="innerHandler">The <see cref="HttpMessageHandler"/> that will be used to send the HTTP request.</param>
+        public HttpCachingHandler(IHttpCache cache, ICacheKeyStrategy keyStrategy, HttpMessageHandler innerHandler)
         {
             _cache = cache ?? throw new ArgumentNullException(nameof(cache));
             _keyStrategy = keyStrategy ?? throw new ArgumentNullException(nameof(keyStrategy));
-            InnerHandler = new HttpClientHandler();
+            InnerHandler = innerHandler;
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
@@ -69,7 +77,7 @@ namespace Cashew
                     cachedResponse.Headers.AddClientCacheStatusHeader(CacheStatus.Hit);
                     return cachedResponse;
                 }
-              
+
                 var isStaleResponseAcceptable = IsStaleResponseAcceptable(request, cachedResponse, currentAge, freshnessLifetime);
                 if (isStaleResponseAcceptable)
                 {

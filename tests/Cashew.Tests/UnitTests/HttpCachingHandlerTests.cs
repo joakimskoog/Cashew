@@ -55,7 +55,7 @@ namespace Cashew.Tests.UnitTests
         {
             Assert.Throws<ArgumentNullException>(() => new HttpCachingHandler(new Mock<IHttpCache>().Object, null));
         }
-
+        
         #endregion
 
         #region Non-supported HTTP verbs
