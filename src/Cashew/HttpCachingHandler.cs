@@ -56,7 +56,7 @@ namespace Cashew
 
             if (!IsRequestCacheable(request))
             {
-                return await base.SendAsync(request, cancellationToken);
+                return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
             }
 
             //This does not seem entirely correct, should we have some other form of handling when request.CacheControl is null?
@@ -101,9 +101,9 @@ namespace Cashew
                 return gatewayResponse;
             }
 
-            var serverResponse = await base.SendAsync(request, cancellationToken);
+            var serverResponse = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
-            return await HandleServerResponse(request, serverResponse, key, serializedCachedResponse);
+            return await HandleServerResponse(request, serverResponse, key, serializedCachedResponse).ConfigureAwait(false);
         }
 
         private async Task<HttpResponseMessage> HandleServerResponse(HttpRequestMessage request, HttpResponseMessage serverResponse, string cacheKey, SerializedHttpResponseMessage serializedCachedResponse)
@@ -143,13 +143,13 @@ namespace Cashew
                 if (isResponseCacheable)
                 {
                     _cache.Remove(cacheKey);
-                    var serializedResponse = await SerializedHttpResponseMessage.Create(serverResponse);
+                    var serializedResponse = await SerializedHttpResponseMessage.Create(serverResponse).ConfigureAwait(false);
                     _cache.Put(updatedCacheKey, serializedResponse);
                 }
             }
             else if (isResponseCacheable)
             {
-                var serializedResponse = await SerializedHttpResponseMessage.Create(serverResponse);
+                var serializedResponse = await SerializedHttpResponseMessage.Create(serverResponse).ConfigureAwait(false);
                 _cache.Put(updatedCacheKey, serializedResponse);
                 serverResponse.Headers.AddClientCacheStatusHeader(CacheStatus.Miss);
             }

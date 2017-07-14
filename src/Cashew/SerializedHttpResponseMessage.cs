@@ -28,7 +28,7 @@ namespace Cashew
             }
             else
             {
-                content = await response.Content.ReadAsByteArrayAsync();
+                content = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
             }
 
             return new SerializedHttpResponseMessage(response, content);
