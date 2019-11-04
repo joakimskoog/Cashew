@@ -2,13 +2,10 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
-using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using Cashew.Keys;
 using Cashew.Tests.Helpers;
-using Cashew.Tests.UnitTests;
-using Moq;
 using Xunit;
 
 namespace Cashew.Tests.IntegrationTests
